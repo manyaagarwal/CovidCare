@@ -19,10 +19,6 @@ class _CalendarState extends State<Calendar>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Calendar'),
-        backgroundColor: Colors.blueGrey,
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
