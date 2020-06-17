@@ -1,64 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
-
-//The main function is the starting point for all flutter apps
-void main() {
-  runApp(MyApp()
-  );
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Calendar',
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage>{
-  CalendarController _controller;
-  @override
-  void initState(){
-    //TODO: implement initState
-    super.initState();
-    _controller = CalendarController();
-}
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Calendar'),
-        backgroundColor: Colors.blueGrey,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            TableCalendar(
-                calendarController: _controller,
-                ),
-          ]
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          navigateToSubPage(context);
-        },
-        child:
-          Icon(Icons.add),
-        backgroundColor: Colors.blueGrey,
-      ),
-    );
-  }
-}
 
 class SubPage extends StatelessWidget{
   @override
@@ -207,12 +147,3 @@ class SubPage extends StatelessWidget{
       );
   }
 }
-
-Future navigateToSubPage(context) async {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => SubPage()));
-}
-
-
-
-
-
