@@ -1,4 +1,5 @@
 import 'package:covidcare/home.dart';
+import 'package:covidcare/login.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         accentColor: MaterialColor(0XFF43DCBE, accentColor),
        ),
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
-      home: HomePage(),
+      home: LoginPage(),
 
     );
   }
