@@ -28,7 +28,7 @@ class _CalendarState extends State<Calendar>{
         return new AlertDialog(
           title:  Center(child: Text('Health Vitals')),
           content: new SingleChildScrollView(
-            child: new ListBody(
+            child: (value.data != null ) ? new ListBody(
               children: [
                 Row(
                   children: <Widget>[
@@ -71,6 +71,8 @@ class _CalendarState extends State<Calendar>{
                   ],
                 ),
               ],
+            ) : Center(
+              child: Text("No data available for this date!"),
             ),
           ),
           actions: [
