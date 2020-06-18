@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'Calendar_Questionaire.dart';
 
 class HomePage extends StatefulWidget {
+  final String title;
+  final String uid;
+  HomePage({Key key, this.title, this.uid}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
