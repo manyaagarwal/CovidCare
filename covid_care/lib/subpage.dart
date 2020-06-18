@@ -1,3 +1,4 @@
+import 'package:covidcare/constants.dart';
 import 'package:flutter/material.dart';
 
 class SubPage extends StatelessWidget{
@@ -5,10 +6,8 @@ class SubPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Colors.blueGrey,
         appBar: AppBar(
-          title: Center(child: Text('Dashboard')),
-          backgroundColor: Colors.blueGrey[600],
+          title: Text("Today"),
         ),
         body: SafeArea(
           child: Column(
@@ -17,27 +16,25 @@ class SubPage extends StatelessWidget{
               SizedBox(
                   height: 10.0
               ),
-              Center(
-                child: Text(
-                  'Today',
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(
-                  height: 10.0
-              ),
+//              Center(
+//                child: Text(
+//                  'Today',
+//                  style: TextStyle(
+//                      fontSize: 30.0,
+//                      color: Colors.white,
+//                      fontWeight: FontWeight.bold),
+//                ),
+//              ),
+//              SizedBox(
+//                  height: 10.0
+//              ),
               Text(
                 'Input Body Temperature',
                 style: TextStyle(
                     fontSize: 20.0,
-                    color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
               Card(
-                color: Colors.grey,
                 margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -58,11 +55,10 @@ class SubPage extends StatelessWidget{
                 'Measure Heartbeat',
                 style: TextStyle(
                     fontSize: 20.0,
-                    color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
               Card(
-                color: Colors.grey,
+                color: Colors.white,
                 margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -83,11 +79,10 @@ class SubPage extends StatelessWidget{
                 'Measure Energy level',
                 style: TextStyle(
                     fontSize: 20.0,
-                    color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
               Card(
-                color: Colors.grey,
+                color: Colors.white,
                 margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -108,11 +103,10 @@ class SubPage extends StatelessWidget{
                 'Input Symptoms',
                 style: TextStyle(
                     fontSize: 20.0,
-                    color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
               Card(
-                color: Colors.grey,
+                color: Colors.white,
                 margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -130,12 +124,11 @@ class SubPage extends StatelessWidget{
                 'eg. Headache, Nausea, continuous sneezes etc',
                 style: TextStyle(
                   fontSize: 15.0,
-                  color: Colors.white,
                 ),
               ),
               RaisedButton(
                 textColor: Colors.white,
-                color: Colors.grey,
+                color: MaterialColor(0XFF94ABF9, primaryColor),
                 child: Text('Save'),
                 onPressed: () {
                   Navigator.pop(context);

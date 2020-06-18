@@ -1,19 +1,20 @@
+import 'package:covidcare/faq.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class LChart extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Example Dialogflow Flutter',
-      theme: new ThemeData(
-        primarySwatch: Colors.deepOrange,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: new LineChartSample1(),
-    );
-  }
-}
+//class LChart extends StatelessWidget {
+//  @override
+//  Widget build(BuildContext context) {
+//    return new MaterialApp(
+//      title: 'Example Dialogflow Flutter',
+//      theme: new ThemeData(
+//        primarySwatch: Colors.deepOrange,
+//      ),
+//      debugShowCheckedModeBanner: false,
+//      home: new LineChartSample1(),
+//    );
+//  }
+//}
 
 class LineChartSample1 extends StatefulWidget {
   @override
@@ -36,19 +37,6 @@ class LineChartSample1State extends State<LineChartSample1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
-        title: Text("Health Overview"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.assessment,
-              color: Colors.white,
-              size: 30,
-            ),
-          ),
-        ],
-      ),
       body: Column(
         children: <Widget>[
           Container(
@@ -62,6 +50,37 @@ class LineChartSample1State extends State<LineChartSample1> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
+                            Container(
+                                padding: EdgeInsets.fromLTRB(25, 18, 25, 22),
+                                margin: EdgeInsets.fromLTRB(15, 5, 15, 15),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.08),
+                                      blurRadius: 10,
+                                      spreadRadius: 2,
+                                      offset: Offset(0, 0),
+                                    ),
+                                  ],
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    navigateToFAQ(context);
+                                  },
+                                  child: Row(
+                                    children: <Widget>[
+                                      Icon(Icons.help, size: 25,),
+                                      Container(
+                                        padding: EdgeInsets.all(16.0),
+                                        width: MediaQuery.of(context).size.width - 150,
+                                        child: Text("Check our Frequently Asked Questions to clarify common doubts!"),
+                                      )
+                                    ],
+                                  ),
+                                )
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
@@ -173,7 +192,7 @@ class LineChartSample1State extends State<LineChartSample1> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text("Conclusion",
+                        child: Text("Today's Status",
                             style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -453,3 +472,8 @@ class LineChartSample1State extends State<LineChartSample1> {
     ];
   }
 }
+
+Future navigateToFAQ(context) async {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => FAQpage()));
+}
+
