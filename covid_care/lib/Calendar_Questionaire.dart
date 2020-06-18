@@ -129,6 +129,10 @@ class _CalendarState extends State<Calendar>{
                 calendarController: _controller,
                 onDayLongPressed: (date, list) {
                   String id = date.day.toString()+date.month.toString()+date.year.toString();
+                  navigateToSubPage(context, widget.uid,id);
+                },
+                onDaySelected: (date, list) {
+                  String id = date.day.toString()+date.month.toString()+date.year.toString();
                   Firestore.instance
                     .collection("users")
                     .document(widget.uid)
@@ -146,7 +150,9 @@ class _CalendarState extends State<Calendar>{
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: (){
-          navigateToSubPage(context, widget.uid);
+          DateTime today = DateTime.now();
+          String todayString = today.day.toString() + today.month.toString() + today.year.toString();
+          navigateToSubPage(context, widget.uid, todayString);
         },
         icon: Icon(Icons.add),
         label: Text("Add health vitals"),
@@ -156,8 +162,8 @@ class _CalendarState extends State<Calendar>{
 }
 
 
-Future navigateToSubPage(context,uid) async {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => SubPage(uid: uid)));
+Future navigateToSubPage(context,uid, date) async {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => SubPage(uid: uid, date:date)));
 }
 
 Future navigateToFAQ(context, uid) async {

@@ -3,7 +3,8 @@ import 'package:covidcare/constants.dart';
 import 'package:flutter/material.dart';
 class SubPage extends StatefulWidget{
   final String uid;
-  SubPage({Key key, this.uid}) : super(key: key);
+  final String date;
+  SubPage({Key key, this.uid, this.date}) : super(key: key);
 
   @override
   _SubPageState createState() => _SubPageState();
@@ -155,12 +156,10 @@ class _SubPageState extends State<SubPage>{
                 color: MaterialColor(0XFF94ABF9, primaryColor),
                 child: Text('Save'),
                 onPressed: () {
-                  DateTime today = DateTime.now();
-                  String todayString = today.day.toString() + today.month.toString() + today.year.toString();
                   Firestore.instance.collection("users")
                       .document(widget.uid)
                       .collection("vitals")
-                      .document(todayString)
+                      .document(widget.date)
                       .setData({
                     'temperature' : bodyTempInputController.text,
                     'heartbeat' : heartBeatInputController.text,
