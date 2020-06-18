@@ -14,6 +14,7 @@ class LChart extends StatelessWidget {
     );
   }
 }
+
 class LineChartSample1 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => LineChartSample1State();
@@ -23,7 +24,9 @@ class LineChartSample1State extends State<LineChartSample1> {
   bool isShowingMainData;
   var text = "General Trend";
   bool change = false;
-
+  var en = "High";
+  var tem = "Standard";
+  var hr = "Low";
   @override
   void initState() {
     super.initState();
@@ -33,130 +36,233 @@ class LineChartSample1State extends State<LineChartSample1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
+        title: Text("Health Overview"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.assessment,
+              color: Colors.white,
+              size: 30,
+            ),
+          ),
+        ],
+      ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Center(
-            child: Container(
-              height: 300,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(18)),
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xff2c274c),
-                    Color(0xff46426c),
-                  ],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                ),
-              ),
-              child: Stack(
+          Container(
+            child: SingleChildScrollView(
+              child: Column(
                 children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Container(
+                    height: 300,
+                    child: Stack(
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
-                            Text(
-                              'My Health Overview',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
+                            const SizedBox(
+                              height: 20,
                             ),
-                            Column(
-                              children: <Widget>[
-                                Container(
-                                  width: 100,
-                                  child: Row(
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10, left: 20, right: 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'My Health Trend',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Column(
                                     children: <Widget>[
                                       Container(
-                                          height: 5,
-                                          width: 5,
-                                          color: Color(0xff4af699),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Temperature",
-                                        style: TextStyle(
-                                          color: Colors.white
-                                        )
-                                      )
-                                    ],
-                                  )
-                                ),
-                                Container(
-                                  width: 100,
-                                  child: Row(
-                                    children: <Widget>[
+                                          width: 100,
+                                          child: Row(
+                                            children: <Widget>[
+                                              Container(
+                                                height: 5,
+                                                width: 5,
+                                                color: Color(0xff4af699),
+                                              ),
+                                              SizedBox(width: 10),
+                                              Text("Energy"),
+                                            ],
+                                          )),
                                       Container(
-                                          height: 5,
-                                          width: 5,
-                                          color: Color(0xffaa4cfc),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Heart Rate",
-                                        style: TextStyle(
-                                          color: Colors.white
-                                        )
-                                      )
-                                    ],
-                                  )
-                                ),
-                                Container(
-                                  width: 100,
-                                  child: Row(
-                                    children: <Widget>[
+                                          width: 100,
+                                          child: Row(
+                                            children: <Widget>[
+                                              Container(
+                                                height: 5,
+                                                width: 5,
+                                                color: Color(0xffaa4cfc),
+                                              ),
+                                              SizedBox(width: 10),
+                                              Text("Heart Rate"),
+                                            ],
+                                          )),
                                       Container(
-                                          height: 5,
-                                          width: 5,
-                                          color: Color(0xff27b6fc),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Energy",
-                                        style: TextStyle(
-                                          color: Colors.white
-                                        )
-                                      )
+                                          width: 100,
+                                          child: Row(
+                                            children: <Widget>[
+                                              Container(
+                                                height: 5,
+                                                width: 5,
+                                                color: Color(0xff27b6fc),
+                                              ),
+                                              SizedBox(width: 10),
+                                              Text("Temperature"),
+                                            ],
+                                          )),
                                     ],
                                   )
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 16.0, left: 6.0),
+                                child: LineChart(
+                                  sampleData1(),
+                                  swapAnimationDuration:
+                                      const Duration(milliseconds: 250),
                                 ),
-                              ],
-                            )
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
                           ],
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 16.0, left: 6.0),
-                          child: LineChart(
-                            sampleData1(),
-                            swapAnimationDuration: const Duration(milliseconds: 250),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
           ),
+          // end of that Graph
+
+          // Conclusion Box
+          Container(
+              padding: EdgeInsets.fromLTRB(25, 18, 25, 22), 
+              margin: EdgeInsets.all(15), 
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.08),
+                    blurRadius: 10,
+                    spreadRadius: 2,
+                    offset: Offset(0, 0),
+                  ),
+                ],
+              ),
+              child: Wrap(
+                runSpacing: 15,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text("Conclusion",
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 90,
+                        child: Text(
+                          "Energy",
+                        ),
+                      ),
+                      Text(" : "),
+                      Text(
+                        "$en",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 90,
+                        child: Text(
+                          "Temperature",
+                        ),
+                      ),
+                      Text(" : "),
+                      Text(
+                        "$tem",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.tealAccent[400],
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 90,
+                        child: Text(
+                          "Heart Rate",
+                        ),
+                      ),
+                      Text(" : "),
+                      Text(
+                        "$hr",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              )),
+          // end of Conclusion Box
+
+          // Message
+          Container(
+            padding: EdgeInsets.fromLTRB(25, 18, 25, 22), 
+            margin: EdgeInsets.fromLTRB(15, 5, 15, 15), 
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.08),
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                  offset: Offset(0, 0),
+                ),
+              ],
+            ),
+            child: Text( 
+              "Monitor your health regulary and take preventinve measures to help fight COVID-19. If you have concerning symptoms, do not hestitate to reach for medical advices available on this app. We are here to help!❤️"
+            ) 
+          ),
+          // end of That Extra Box
+          
         ],
       ),
-     
     );
   }
 
@@ -192,35 +298,34 @@ class LineChartSample1State extends State<LineChartSample1> {
                 return '3';
               case 3:
                 return '4';
-              case 4: 
+              case 4:
                 return '5';
-              case 5: 
+              case 5:
                 return '6';
-              case 6: 
+              case 6:
                 return '7';
-              case 7: 
+              case 7:
                 return '8';
-              case 8: 
+              case 8:
                 return '9';
-              case 9: 
+              case 9:
                 return '10';
-              case 10: 
+              case 10:
                 return '11';
-              case 11: 
+              case 11:
                 return '12';
-              case 12: 
+              case 12:
                 return '13';
-              case 13: 
+              case 13:
                 return '14';
             }
             return '';
           },
         ),
-        
         leftTitles: SideTitles(
           showTitles: true,
           textStyle: const TextStyle(
-            color: Color(0xff75729e),
+            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontSize: 10,
           ),
@@ -239,10 +344,11 @@ class LineChartSample1State extends State<LineChartSample1> {
           reservedSize: 38,
         ),
       ),
-      
+
       borderData: FlBorderData(
         show: true,
-        border: const Border(   // this is the x axis line thing
+        border: const Border(
+          // this is the x axis line thing
           bottom: BorderSide(
             color: Color(0xff4e4965),
             width: 5, // thickness of line
@@ -260,29 +366,29 @@ class LineChartSample1State extends State<LineChartSample1> {
       ),
       minX: 0,
       maxX: 14,
-      maxY: 3.8,  // changed this
+      maxY: 3.8, // changed this
       minY: 0,
       lineBarsData: linesBarData1(),
     );
   }
   // The sequence of input i.e. 2nd day => x = n-1
-  // Low  y<=1, 
-  // Standard 1<y<3, 
-  // High y >=3, 
+  // Low  y<=1,
+  // Standard 1<y<3,
+  // High y >=3,
   // Y axis for temp = temp- 35.6 +1;
   // Y axis for Heartbeat = Heartbeat/50 + 0.8
   // Y axis for Energy => low = 1, std = 2, high =3
 
-  List<LineChartBarData> linesBarData1() { 
+  List<LineChartBarData> linesBarData1() {
     final LineChartBarData lineChartBarData1 = LineChartBarData(
       spots: [
         FlSpot(0, 3),
         FlSpot(1, 1.5),
         FlSpot(2, 1.4),
         FlSpot(4, 2),
-        FlSpot(5, 2.2),
-        FlSpot(6, 1.8),
-        FlSpot(7, 3.4),
+        FlSpot(7, 2.2),
+        FlSpot(10, 1.8),
+        FlSpot(13, 3.4),
       ],
       isCurved: true,
       colors: [
@@ -299,12 +405,12 @@ class LineChartSample1State extends State<LineChartSample1> {
     );
     final LineChartBarData lineChartBarData2 = LineChartBarData(
       spots: [
-        FlSpot(1, 1),
+        FlSpot(0, 1),
         FlSpot(3, 2.8),
         FlSpot(7, 1.2),
         FlSpot(10, 2.8),
         FlSpot(12, 2.6),
-        FlSpot(13, 2.9),  // changed this
+        FlSpot(13, 2.9), // changed this
       ],
       isCurved: true,
       colors: [
@@ -321,9 +427,9 @@ class LineChartSample1State extends State<LineChartSample1> {
     );
     final LineChartBarData lineChartBarData3 = LineChartBarData(
       spots: [
-        FlSpot(1, 2.8),
-        FlSpot(3, 1.9),
-        FlSpot(6, 3),
+        FlSpot(0, 2.8),
+        FlSpot(3, 2),
+        FlSpot(6, 1.5),
         FlSpot(10, 1.3),
         FlSpot(13, 2.5),
       ],
@@ -346,5 +452,4 @@ class LineChartSample1State extends State<LineChartSample1> {
       lineChartBarData3,
     ];
   }
-
 }
