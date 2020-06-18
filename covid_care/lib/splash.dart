@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     FirebaseAuth.instance
         .currentUser()
         .then((currentUser) => {
-      if (currentUser == null)
+      if (currentUser.uid == null)
         {
           Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
         }

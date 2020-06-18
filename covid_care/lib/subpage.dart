@@ -1,7 +1,33 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidcare/constants.dart';
 import 'package:flutter/material.dart';
+class SubPage extends StatefulWidget{
+  final String uid;
+  SubPage({Key key, this.uid}) : super(key: key);
 
-class SubPage extends StatelessWidget{
+  @override
+  _SubPageState createState() => _SubPageState();
+}
+
+class _SubPageState extends State<SubPage>{
+
+  final GlobalKey<FormState> _vitalsFormKey = GlobalKey<FormState>();
+  TextEditingController bodyTempInputController;
+  TextEditingController heartBeatInputController;
+  TextEditingController energyLevelInputController;
+  TextEditingController symptomsInputController;
+
+  @override
+  initState(){
+    bodyTempInputController = new TextEditingController();
+    heartBeatInputController = new TextEditingController();
+    energyLevelInputController = new TextEditingController();
+    symptomsInputController = new TextEditingController();
+    super.initState();
+    print('uid subpage:');
+    print(widget.uid);
+  }
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -16,18 +42,6 @@ class SubPage extends StatelessWidget{
               SizedBox(
                   height: 10.0
               ),
-//              Center(
-//                child: Text(
-//                  'Today',
-//                  style: TextStyle(
-//                      fontSize: 30.0,
-//                      color: Colors.white,
-//                      fontWeight: FontWeight.bold),
-//                ),
-//              ),
-//              SizedBox(
-//                  height: 10.0
-//              ),
               Text(
                 'Input Body Temperature',
                 style: TextStyle(
@@ -43,8 +57,11 @@ class SubPage extends StatelessWidget{
                         Icons.add_circle ,
                         color: Colors.black
                     ),
-                    title: TextField(
+                    title: TextFormField(
+                      controller: bodyTempInputController,
+                      keyboardType: TextInputType.number,
                     ),
+                    trailing: Text("C"),
                   ),
                 ),
               ),
@@ -67,8 +84,11 @@ class SubPage extends StatelessWidget{
                         Icons.favorite,
                         color: Colors.black
                     ),
-                    title: TextField(
+                    title: TextFormField(
+                      controller: heartBeatInputController,
+                      keyboardType: TextInputType.number,
                     ),
+                    trailing: Text("BPM"),
                   ),
                 ),
               ),
@@ -91,7 +111,9 @@ class SubPage extends StatelessWidget{
                         Icons.flash_on,
                         color: Colors.black
                     ),
-                    title: TextField(
+                    title: TextFormField(
+                      controller: energyLevelInputController,
+                      keyboardType: TextInputType.number,
                     ),
                   ),
                 ),
@@ -115,7 +137,9 @@ class SubPage extends StatelessWidget{
                         Icons.add_alert,
                         color: Colors.black
                     ),
-                    title: TextField(
+                    title: TextFormField(
+                      controller: symptomsInputController,
+                      keyboardType: TextInputType.text,
                     ),
                   ),
                 ),
@@ -131,7 +155,20 @@ class SubPage extends StatelessWidget{
                 color: MaterialColor(0XFF94ABF9, primaryColor),
                 child: Text('Save'),
                 onPressed: () {
-                  Navigator.pop(context);
+                  DateTime today = DateTime.now();
+                  String todayString = today.day.toString() + today.month.toString() + today.year.toString();
+                  Firestore.instance.collection("users")
+                      .document(widget.uid)
+                      .collection("vitals")
+                      .document(todayString)
+                      .setData({
+                    'temperature' : bodyTempInputController.text,
+                    'heartbeat' : heartBeatInputController.text,
+                    'energy' : energyLevelInputController.text,
+                    'symptoms' : symptomsInputController.text,
+                  }).then((value) =>
+                      Navigator.pop(context)
+                  );
                 },
               )
             ],

@@ -108,6 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ))))
                               .catchError((err) => print(err)))
                               .catchError((err) => print(err));
+                          CircularProgressIndicator();
                         }
                       },
                     ),

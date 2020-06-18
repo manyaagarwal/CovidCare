@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FAQpage extends StatefulWidget {
+  final String uid;
+  FAQpage({Key key, this.uid}) : super(key:key);
   @override
   _FAQpageState createState() => _FAQpageState();
 }
