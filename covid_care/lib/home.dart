@@ -1,4 +1,5 @@
 import 'package:covidcare/chart.dart';
+import 'package:covidcare/constants.dart';
 import 'package:covidcare/consultation.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage>{
             )
           ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: MaterialColor(0XFF94ABF9, primaryColor),
         onTap: _onItemTapped,
       ),
     );
