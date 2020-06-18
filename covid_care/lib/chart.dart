@@ -2,7 +2,6 @@ import 'package:covidcare/faq.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-
 class LineChartSample1 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => LineChartSample1State();
@@ -28,246 +27,248 @@ class LineChartSample1State extends State<LineChartSample1> {
         child: Column(
           children: <Widget>[
             Container(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 300,
-                      child: Stack(
-                        children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              Container(
-                                  padding: EdgeInsets.fromLTRB(25, 18, 25, 22),
-                                  margin: EdgeInsets.fromLTRB(15, 5, 15, 15),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.08),
-                                        blurRadius: 10,
-                                        spreadRadius: 2,
-                                        offset: Offset(0, 0),
-                                      ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 400,
+                    child: Stack(
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10, left: 20, right: 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'My Health Trend',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Container(
+                                          width: 100,
+                                          child: Row(
+                                            children: <Widget>[
+                                              Container(
+                                                height: 5,
+                                                width: 5,
+                                                color: Color(0xff4af699),
+                                              ),
+                                              SizedBox(width: 10),
+                                              Text("Energy"),
+                                            ],
+                                          )),
+                                      Container(
+                                          width: 100,
+                                          child: Row(
+                                            children: <Widget>[
+                                              Container(
+                                                height: 5,
+                                                width: 5,
+                                                color: Color(0xffaa4cfc),
+                                              ),
+                                              SizedBox(width: 10),
+                                              Text("Heart Rate"),
+                                            ],
+                                          )),
+                                      Container(
+                                          width: 100,
+                                          child: Row(
+                                            children: <Widget>[
+                                              Container(
+                                                height: 5,
+                                                width: 5,
+                                                color: Color(0xff27b6fc),
+                                              ),
+                                              SizedBox(width: 10),
+                                              Text("Temperature"),
+                                            ],
+                                          )),
                                     ],
-                                  ),
-                                  child: InkWell(
-                                    onTap: () {
-                                      navigateToFAQ(context);
-                                    },
-                                    child: Row(
-                                      children: <Widget>[
-                                        Icon(Icons.help, size: 25,),
-                                        Container(
-                                          padding: EdgeInsets.all(16.0),
-                                          width: MediaQuery.of(context).size.width - 150,
-                                          child: Text("Check our Frequently Asked Questions to clarify common doubts!"),
-                                        )
-                                      ],
-                                    ),
                                   )
+                                ],
                               ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Padding(
+                            ),
+                            Expanded(
+                              child: Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 10, left: 20, right: 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      'My Health Trend',
-                                      style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Container(
-                                            width: 100,
-                                            child: Row(
-                                              children: <Widget>[
-                                                Container(
-                                                  height: 5,
-                                                  width: 5,
-                                                  color: Color(0xff4af699),
-                                                ),
-                                                SizedBox(width: 10),
-                                                Text("Energy"),
-                                              ],
-                                            )),
-                                        Container(
-                                            width: 100,
-                                            child: Row(
-                                              children: <Widget>[
-                                                Container(
-                                                  height: 5,
-                                                  width: 5,
-                                                  color: Color(0xffaa4cfc),
-                                                ),
-                                                SizedBox(width: 10),
-                                                Text("Heart Rate"),
-                                              ],
-                                            )),
-                                        Container(
-                                            width: 100,
-                                            child: Row(
-                                              children: <Widget>[
-                                                Container(
-                                                  height: 5,
-                                                  width: 5,
-                                                  color: Color(0xff27b6fc),
-                                                ),
-                                                SizedBox(width: 10),
-                                                Text("Temperature"),
-                                              ],
-                                            )),
-                                      ],
-                                    )
-                                  ],
+                                    right: 16.0, left: 6.0),
+                                child: LineChart(
+                                  sampleData1(),
+                                  swapAnimationDuration:
+                                      const Duration(milliseconds: 250),
                                 ),
                               ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 16.0, left: 6.0),
-                                  child: LineChart(
-                                    sampleData1(),
-                                    swapAnimationDuration:
-                                        const Duration(milliseconds: 250),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                            ],
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                      padding: EdgeInsets.fromLTRB(25, 18, 25, 22),
+                      margin: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.08),
+                            blurRadius: 10,
+                            spreadRadius: 2,
+                            offset: Offset(0, 0),
                           ),
                         ],
                       ),
+                      child: Wrap(
+                        runSpacing: 15,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text("Today's Status",
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                width: 90,
+                                child: Text(
+                                  "Energy",
+                                ),
+                              ),
+                              Text(" : "),
+                              Text(
+                                "$en",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.redAccent,
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                width: 90,
+                                child: Text(
+                                  "Temperature",
+                                ),
+                              ),
+                              Text(" : "),
+                              Text(
+                                "$tem",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.tealAccent[400],
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                width: 90,
+                                child: Text(
+                                  "Heart Rate",
+                                ),
+                              ),
+                              Text(" : "),
+                              Text(
+                                "$hr",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blueAccent,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      )),
+                  // end of Conclusion Box
+
+                  // Message
+
+                  Container(
+                      padding: EdgeInsets.fromLTRB(25, 18, 25, 22),
+                      margin: EdgeInsets.fromLTRB(15, 5, 15, 15),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.08),
+                            blurRadius: 10,
+                            spreadRadius: 2,
+                            offset: Offset(0, 0),
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                          "Monitor your health regulary and take preventinve measures to help fight COVID-19. If you have concerning symptoms, do not hestitate to reach for medical advices available on this app. We are here to help!❤️")),
+                  // end of That Extra Box
+
+                  Container(
+                    padding: EdgeInsets.fromLTRB(25, 18, 25, 22),
+                    margin: EdgeInsets.fromLTRB(15, 5, 15, 15),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.08),
+                          blurRadius: 10,
+                          spreadRadius: 2,
+                          offset: Offset(0, 0),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                    child: InkWell(
+                      onTap: () {
+                        navigateToFAQ(context);
+                      },
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.help,
+                            size: 25,
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(16.0),
+                            width: MediaQuery.of(context).size.width - 150,
+                            child: Text(
+                                "Check our Frequently Asked Questions to clarify common doubts!"),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             // end of that Graph
 
             // Conclusion Box
-            Container(
-                padding: EdgeInsets.fromLTRB(25, 18, 25, 22), 
-                margin: EdgeInsets.all(15), 
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.08),
-                      blurRadius: 10,
-                      spreadRadius: 2,
-                      offset: Offset(0, 0),
-                    ),
-                  ],
-                ),
-                child: Wrap(
-                  runSpacing: 15,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Text("Today's Status",
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              )),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          width: 90,
-                          child: Text(
-                            "Energy",
-                          ),
-                        ),
-                        Text(" : "),
-                        Text(
-                          "$en",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.redAccent,
-                          ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          width: 90,
-                          child: Text(
-                            "Temperature",
-                          ),
-                        ),
-                        Text(" : "),
-                        Text(
-                          "$tem",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.tealAccent[400],
-                          ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          width: 90,
-                          child: Text(
-                            "Heart Rate",
-                          ),
-                        ),
-                        Text(" : "),
-                        Text(
-                          "$hr",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blueAccent,
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                )),
-            // end of Conclusion Box
-
-            // Message
-            Container(
-              padding: EdgeInsets.fromLTRB(25, 18, 25, 22), 
-              margin: EdgeInsets.fromLTRB(15, 5, 15, 15), 
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.08),
-                    blurRadius: 10,
-                    spreadRadius: 2,
-                    offset: Offset(0, 0),
-                  ),
-                ],
-              ),
-              child: Text( 
-                "Monitor your health regulary and take preventinve measures to help fight COVID-19. If you have concerning symptoms, do not hestitate to reach for medical advices available on this app. We are here to help!❤️"
-              ) 
-            ),
-            // end of That Extra Box
-            
           ],
         ),
       ),
@@ -465,4 +466,3 @@ class LineChartSample1State extends State<LineChartSample1> {
 Future navigateToFAQ(context) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) => FAQpage()));
 }
-
