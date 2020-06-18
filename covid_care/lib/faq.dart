@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
 
-class FAQ extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: FAQpage(),
-    );
-  }
-}
-
 class FAQpage extends StatefulWidget {
+  final String uid;
+  FAQpage({Key key, this.uid}) : super(key:key);
   @override
   _FAQpageState createState() => _FAQpageState();
 }
@@ -20,16 +12,14 @@ class _FAQpageState extends State<FAQpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(
-          "CovidCare",
+          "FAQs",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 25,
           ),
         ),
-        backgroundColor: Colors.blueAccent,
       ),
       body: Column(
         children: <Widget>[
