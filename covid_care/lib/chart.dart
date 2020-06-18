@@ -51,7 +51,6 @@ class LineChartSample1State extends State<LineChartSample1> {
       ),
       body: Column(
         children: <Widget>[
-          // Welcome, to the mmost nested Graph you'll ever lay your eyes on
           Container(
             child: SingleChildScrollView(
               child: Column(
@@ -154,8 +153,8 @@ class LineChartSample1State extends State<LineChartSample1> {
 
           // Conclusion Box
           Container(
-              padding: EdgeInsets.fromLTRB(25, 18, 25, 22), // just play with these values and see how they behave
-              margin: EdgeInsets.all(15), // this allowed me to show the shadows while changing the "gaps" of the "card"
+              padding: EdgeInsets.fromLTRB(25, 18, 25, 22), 
+              margin: EdgeInsets.all(15), 
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -240,10 +239,10 @@ class LineChartSample1State extends State<LineChartSample1> {
               )),
           // end of Conclusion Box
 
-          // That Extra Box
+          // Message
           Container(
-            padding: EdgeInsets.fromLTRB(25, 18, 25, 22), // just play with these values and see how they behave
-            margin: EdgeInsets.fromLTRB(15, 5, 15, 15), // this allowed me to show the shadows while changing the "gaps" of the "card"
+            padding: EdgeInsets.fromLTRB(25, 18, 25, 22), 
+            margin: EdgeInsets.fromLTRB(15, 5, 15, 15), 
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -256,7 +255,9 @@ class LineChartSample1State extends State<LineChartSample1> {
                 ),
               ],
             ),
-            //child: whatever your heart desires for this app here! 
+            child: Text( 
+              "Monitor your health regulary and take preventinve measures to help fight COVID-19. If you have concerning symptoms, do not hestitate to reach for medical advices available on this app. We are here to help!❤️"
+            ) 
           ),
           // end of That Extra Box
           
