@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covidcare/constants.dart';
 import 'package:covidcare/faq.dart';
 import 'package:covidcare/subpage.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,71 @@ class _CalendarState extends State<Calendar>{
     super.initState();
     _controller = CalendarController();
 }
+
+  void showVitals(value){
+    showDialog(
+      context: context, barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return new AlertDialog(
+          title:  Center(child: Text('Health Vitals')),
+          content: new SingleChildScrollView(
+            child: new ListBody(
+              children: [
+                Row(
+                  children: <Widget>[
+                    Icon(
+                        Icons.add_circle ,
+                        color:  MaterialColor(0XFF43DCBE, accentColor),
+                    ),
+                    Text("Temperature: "),
+                    Text(value.data["temperature"] + " °C"),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Icon(
+                        Icons.favorite,
+                        color: MaterialColor(0XFF94ABF9, primaryColor),
+                    ),
+                    Text("Heart Rate: "),
+                    Text(value.data["heartbeat"] + "bpm"),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Icon(
+                        Icons.flash_on,
+                        color: MaterialColor(0XFF43DCBE, accentColor),
+                    ),
+                    Text("Energy Level: "),
+                    Text(value.data["energy"] + " %"),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Icon(
+                        Icons.add_alert,
+                        color: MaterialColor(0XFF94ABF9, primaryColor),
+                    ),
+                    Text("Symptoms: "),
+                    Text(value.data["symptoms"]),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            new FlatButton(
+              child: new Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +133,8 @@ class _CalendarState extends State<Calendar>{
                     .collection("vitals")
                     .document(id)
                     .get()
-                    .then((value) => {
-                    print(value.data)
-                  }
+                    .then((value) =>
+                      showVitals(value)
                   );
                 },
 
