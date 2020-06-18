@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidcare/faq.dart';
 import 'package:covidcare/subpage.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calendar extends StatefulWidget {
+  final String uid;
+  Calendar({Key key, this.uid}) : super (key:key);
   @override
   _CalendarState createState() => _CalendarState();
 }
@@ -22,7 +25,6 @@ class _CalendarState extends State<Calendar>{
     return Scaffold(
       body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
                 padding: EdgeInsets.fromLTRB(25, 18, 25, 22),
@@ -41,7 +43,7 @@ class _CalendarState extends State<Calendar>{
                 ),
                 child: InkWell(
                   onTap: () {
-                    navigateToFAQ(context);
+                    navigateToFAQ(context, widget.uid);
                     },
                   child: Row(
                     children: <Widget>[
@@ -57,13 +59,27 @@ class _CalendarState extends State<Calendar>{
             ),
             TableCalendar(
                 calendarController: _controller,
+                onDayLongPressed: (date, list) {
+                  String id = date.day.toString()+date.month.toString()+date.year.toString();
+                  Firestore.instance
+                    .collection("users")
+                    .document(widget.uid)
+                    .collection("vitals")
+                    .document(id)
+                    .get()
+                    .then((value) => {
+                    print(value.data)
+                  }
+                  );
+                },
+
                 ),
           ]
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: (){
-          navigateToSubPage(context);
+          navigateToSubPage(context, widget.uid);
         },
         icon: Icon(Icons.add),
         label: Text("Add health vitals"),
@@ -73,12 +89,12 @@ class _CalendarState extends State<Calendar>{
 }
 
 
-Future navigateToSubPage(context) async {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => SubPage()));
+Future navigateToSubPage(context,uid) async {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => SubPage(uid: uid)));
 }
 
-Future navigateToFAQ(context) async {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => FAQpage()));
+Future navigateToFAQ(context, uid) async {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => FAQpage(uid: uid)));
 }
 
 

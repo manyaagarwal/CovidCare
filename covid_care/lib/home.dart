@@ -16,14 +16,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>{
   int _selectedIndex = 0;
+  static String userId;
+  List<Widget> _widgetOptions;
+
+  @override
+  initState(){
+    userId = widget.uid;
+    print("userId");
+    print(userId);
+    _widgetOptions = <Widget>[
+      Calendar(uid:userId),
+      LineChartSample1(),
+      Consultation(),
+    ];
+    super.initState();
+  }
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
-   List<Widget> _widgetOptions = <Widget>[
-    Calendar(),
-    LineChartSample1(),
-    Consultation(),
-     FAQpage(),
-  ];
+
 
    List<Widget> _appBar = <Widget>[
      AppBar(
