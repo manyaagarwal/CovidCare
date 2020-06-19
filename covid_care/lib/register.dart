@@ -17,6 +17,10 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailInputController;
   TextEditingController pwdInputController;
   TextEditingController confirmPwdInputController;
+  TextEditingController countryInputController;
+  TextEditingController regionInputController;
+  TextEditingController ageInputController;
+  TextEditingController medicalHistoryController;
 
   @override
   initState() {
@@ -25,6 +29,10 @@ class _RegisterPageState extends State<RegisterPage> {
     emailInputController = new TextEditingController();
     pwdInputController = new TextEditingController();
     confirmPwdInputController = new TextEditingController();
+    countryInputController = new TextEditingController();
+    regionInputController = new TextEditingController();
+    ageInputController = new TextEditingController();
+    medicalHistoryController = new TextEditingController();
     super.initState();
   }
 
@@ -81,6 +89,30 @@ class _RegisterPageState extends State<RegisterPage> {
                           }),
                       TextFormField(
                         decoration: InputDecoration(
+                            labelText: 'Country*', hintText: "India"),
+                        controller: countryInputController,
+                        keyboardType: TextInputType.text,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: 'Region/Province/State', hintText: "Uttar Pradesh"),
+                        controller: regionInputController,
+                        keyboardType: TextInputType.text,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: 'Age*', hintText: "25"),
+                        controller: ageInputController,
+                        keyboardType: TextInputType.number,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: 'Medical History*', hintText: "Diabetes"),
+                        controller: medicalHistoryController,
+                        keyboardType: TextInputType.text,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
                             labelText: 'Email*', hintText: "john.doe@gmail.com"),
                         controller: emailInputController,
                         keyboardType: TextInputType.emailAddress,
@@ -120,6 +152,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                 "fname": firstNameInputController.text,
                                 "surname": lastNameInputController.text,
                                 "email": emailInputController.text,
+                                "age": ageInputController.text,
+                                "history" : medicalHistoryController.text,
+                                "country": countryInputController.text,
+                                "region" : regionInputController.text,
                               })
                                   .then((result) => {
                                 Navigator.pushAndRemoveUntil(
@@ -137,7 +173,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                 lastNameInputController.clear(),
                                 emailInputController.clear(),
                                 pwdInputController.clear(),
-                                confirmPwdInputController.clear()
+                                confirmPwdInputController.clear(),
+                                ageInputController.clear(),
+                                medicalHistoryController.clear(),
+                                countryInputController.clear(),
+                                regionInputController.clear(),
                               })
                                   .catchError((err) => print(err)))
                                   .catchError((err) => print(err));

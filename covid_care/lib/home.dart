@@ -1,7 +1,6 @@
 import 'package:covidcare/chart.dart';
 import 'package:covidcare/constants.dart';
 import 'package:covidcare/consultation.dart';
-import 'package:covidcare/faq.dart';
 import 'package:flutter/material.dart';
 
 import 'Calendar_Questionaire.dart';

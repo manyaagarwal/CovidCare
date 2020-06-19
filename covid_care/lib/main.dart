@@ -1,11 +1,14 @@
-import 'package:covidcare/home.dart';
 import 'package:covidcare/login.dart';
+import 'package:covidcare/service_locator.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
 
 
-void main() => runApp(MyApp());
+void main(){
+  setupLocator();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
 

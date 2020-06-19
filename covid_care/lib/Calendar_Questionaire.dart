@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidcare/constants.dart';
 import 'package:covidcare/faq.dart';
+import 'package:covidcare/service_locator.dart';
 import 'package:covidcare/subpage.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import 'calls_and_messages_service.dart';
 
 class Calendar extends StatefulWidget {
   final String uid;
@@ -14,6 +17,9 @@ class Calendar extends StatefulWidget {
 
 class _CalendarState extends State<Calendar>{
   CalendarController _controller;
+  final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
+
+  final String number = "1800180514528";
   @override
   void initState(){
     //TODO: implement initState
@@ -94,6 +100,37 @@ class _CalendarState extends State<Calendar>{
       body: Center(
         child: Column(
           children: <Widget>[
+            Container(
+                padding: EdgeInsets.fromLTRB(25, 18, 25, 22),
+                margin: EdgeInsets.fromLTRB(15, 5, 15, 15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.08),
+                      blurRadius: 10,
+                      spreadRadius: 2,
+                      offset: Offset(0, 0),
+                    ),
+                  ],
+                ),
+                child: InkWell(
+                  onTap: () {
+                      _service.call(number);
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.call, size: 25,),
+                      Container(
+                        padding: EdgeInsets.all(16.0),
+                        width: MediaQuery.of(context).size.width - 150,
+                        child: Text("Call for more information regarding testing in your area!"),
+                      )
+                    ],
+                  ),
+                )
+            ),
             Container(
                 padding: EdgeInsets.fromLTRB(25, 18, 25, 22),
                 margin: EdgeInsets.fromLTRB(15, 5, 15, 15),
